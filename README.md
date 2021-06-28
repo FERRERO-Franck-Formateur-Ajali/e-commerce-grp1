@@ -1,5 +1,8 @@
 # e-commerce-grp1
 
+### installation du CLI symfony 
+https://get.symfony.com/cli/setup.exe
+
 ### Cloner le projet   
 git clone https://github.com/madbrain67/STARTER-KIT-SYMFONY.git  
   
