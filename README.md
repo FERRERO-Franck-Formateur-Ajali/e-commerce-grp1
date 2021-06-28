@@ -29,5 +29,5 @@ symfony server:ca:install
 ### lancer le starter-kit  
 symfony server:start  
 
-### Va sur l'url /mdp pour recuperer le mot de passe hasher    
+Va sur l'url /mdp pour recuperer le mot de passe hasher    
  
