@@ -18,3 +18,8 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> Test ###
+/src/Controller/TestController.php
+/templates/test/*
+###< Test ###
