@@ -1,0 +1,51 @@
+.barrer {
+	text-decoration:line-through;
+    color:rgb(179, 179, 179)
+}
+
+.btn-color{
+    background-color:rgb(159, 201, 82);
+    color: white;
+    font-weight: 800 !important;
+    margin: 5px;
+
+}
+
+.card-body { 
+    display: flex;
+    flex-direction: column;
+} 
+
+button.btn { 
+    margin-top: auto; 
+}
+
+.btn-color:hover{
+    color:rgb(255, 208, 0);
+}
+
+.center{
+    text-align: center;
+}
+    
+
+.bord-radius{
+    border: solid 10px;
+    color:rgb(159, 201, 82);
+    border-radius: 30px;
+}
+
+.pagination-background{
+    background-color: rgb(159, 201, 82) !important;
+    color: white !important;
+    font-weight: 700 !important;
+}
+    
+@media (min-width:34em) {
+    .card-deck > .card
+    {
+        width: 29%;
+        flex-wrap: wrap;
+        flex: initial; 
+    }
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<produit>
+    <div class="produits row row-cols-2 m-5">
+        <img src="{{ produit.image }}" class="bord-radius" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ produit.name }}</h5>
+            <p>{{ produit.content | raw }}</p>
+            <hr>
+            <p>{{ produit.details | raw }}</p>
+            <span class="{{ produit.prixpromo != null ? 'barrer' : ''}}">{{ produit.price }} €/Kg</span><p>{{ produit.prixpromo }}</p>
+            <p> Disponibilité:
+                {% if produit.stock == 0 %}
+                    <img src="{{ asset('favicon_io red/favicon-16x16.png')}}">
+                {% else %}
+                    <img src="{{ asset('favicon_io green/favicon-16x16.png')}}">
+                {% endif %}
+            </p>
+            <button href="" class="btn focus btn-color"><img src="/favicon_cart/cart1.png" alt="icone" style="position:relative"> Ajouter au panier</button>
+        </div>
+    </div>
+</produit>
+
+{% endblock %}
