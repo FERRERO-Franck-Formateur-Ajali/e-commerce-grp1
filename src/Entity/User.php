@@ -62,6 +62,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $phone;
 
+    private $newemail;
+    private $newpassword;
+
     public function __construct()
     {
         $this->roles=['ROLES_USER'];
@@ -211,6 +214,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newpassword
+     */ 
+    public function getNewpassword()
+    {
+        return $this->newpassword;
+    }
+
+    /**
+     * Set the value of newpassword
+     *
+     * @return  self
+     */ 
+    public function setNewpassword($newpassword)
+    {
+        $this->newpassword = $newpassword;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newemail
+     */ 
+    public function getNewemail()
+    {
+        return $this->newemail;
+    }
+
+    /**
+     * Set the value of newemail
+     *
+     * @return  self
+     */ 
+    public function setNewemail($newemail)
+    {
+        $this->newemail = $newemail;
 
         return $this;
     }
