@@ -5,15 +5,16 @@
         <title>{% block title %}{% endblock %}</title>
         
          <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/elegant-icons.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/nice-select.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/slicknav.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('/css/custom.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         {% endblock %}
@@ -116,14 +117,14 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('/img/logo.png') }}" alt=""></a>
+                        <a href="{{ path('home') }}"><img src="{{ asset('/img/logo.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
                             <li><a href="{{ path('home') }}">Accueil</a></li>
-                            <li><a href="#">Produits</a>
+                            <li><a href="{{ path('produits') }}">Produits</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Fruits</a></li>
                                     <li><a href="./shoping-cart.html">Légumes</a></li>
@@ -230,8 +231,8 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         {% endblock %}
     </body>
 </html>

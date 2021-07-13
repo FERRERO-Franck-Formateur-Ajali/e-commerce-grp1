@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <produit>
+        <div class="produits row row-cols-2 m-5">
+            <img src="{{ produit.image }}" class="bord-radius" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ produit.name }}</h5>
+                <p>{{ produit.content | raw }}</p>
+                <hr>
+                <p>{{ produit.details | raw }}</p>
+                <span class="{{ produit.prixpromo != null ? 'barrer' : ''}}">{{ produit.price }} €/Kg</span><p>{{ produit.prixpromo }}</p>
+                <p> Disponibilité:
+                    {% if produit.stock == 0 %}
+                        <img src="{{ asset('favicon_io red/favicon-16x16.png')}}">
+                    {% else %}
+                        <img src="{{ asset('favicon_io green/favicon-16x16.png')}}">
+                    {% endif %}
+                </p>
+                <button href="" class="btn focus btn-color"><img src="/favicon_cart/cart1.png" alt="icone" style="position:relative"> Ajouter au panier</button>
+            </div>
+        </div>
+    </produit>
+
+    <section id="commentaires" class="bord-radius m-5 p-5">
+
+        <h2 class="center mb-5">{{ produit.comments | length }} avis sur le produit:</h2>
+
+        {% for comment in produit.comments %}
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4>{{ comment.author }}</h4>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>{{ comment.content | raw }}</p>
+                    <footer class="blockquote-footer">Le {{comment.createdAt | date ( 'd/m/Y à H:i' )}} </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <br/><hr><br/>
+
+        {% if app.user %}
+
+        {{ form_start(CommentForm) }}
+        {{ form_row(CommentForm.author, { 'label': "Pseudo", 'attr': {'placeholder': "Veuillez renseigner votre pseudo"}}) }}
+        {{ form_row(CommentForm.content, { 'label': "Commentaire", 'attr': {'placeholder': "Veuillez écrire votre commentaire"}}) }} 
+
+        <button type="submit" class="btn btn-success">Commenter</button> 
+
+        {{ form_end(CommentForm) }}
+
+        {% else %}
+            <h3 class="center">Vous ne pouvez pas commenter sans être connecter</h3>
+            <div class="center mt-4">
+                <a href="#" class="btn btn-success">
+                    Se connecter
+                </a>
+            </div>
+        {% endif %}
+
+    </section>
+
+{% endblock %}
