@@ -4,6 +4,23 @@
 
 {% block body %}
 
-<h1> Informations personnelles </h1>
+    <h1 class="center m-5">Mes informations personnelles</h1>
+
+    {% for user in User %}
+
+        <div class="card  m-4">
+            <div class="card-body">
+                <h5 class="card-title center">Mes info perso</h5>
+                <p class="card-text">Nom: {{ user.nom }}</p>
+                <p class="card-text">Prénom: {{ user.prenom }}</p>
+                <p class="card-text">Email: {{ user.email }}</p>
+                <p class="card-text">Mot de passe: {{ user.plainPassword }}</p>
+                <p class="card-text">Date de naissance: {{ user.birthday }}</p>
+                <p class="card-text">Téléphone: {{ user.phone }}</p>
+                <a href="{{ path('info_edit', {'id': user.id}) }}" class="btn btn-success m-1">Modifier</a>
+            </div>
+        </div>
+
+    {% endfor %}
 
 {% endblock %}

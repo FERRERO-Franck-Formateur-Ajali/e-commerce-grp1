@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!{% endblock %}
+
+{% block body %}
+
+
+<div class="m-5">
+    <h1 class="center m-5"> Adresse de facturations </h1>
+
+    <h3 class="mt-5 mb-5">Ajouter une nouvelle adresse de facturation</h3>
+
+    {{ form_start(AdresseFacturationType) }}
+
+        {{ form_row(AdresseFacturationType.nom, {'label': "Nom", 'attr': {'placeholder': "Votre nom"}}) }}
+        {{ form_row(AdresseFacturationType.prenom, {'label': "Prénom", 'attr': {'placeholder': "Votre prénom"}}) }}
+        {{ form_row(AdresseFacturationType.adresse, {'label': "Adresse", 'attr': {'placeholder': "Votre adresse"}}) }}
+        {{ form_row(AdresseFacturationType.cp, {'label': "Code postal", 'attr': {'placeholder': "Votre code postal"}}) }}
+        {{ form_row(AdresseFacturationType.ville, {'label': "Ville", 'attr': {'placeholder': "Votre ville de résidence"}}) }}
+        {{ form_row(AdresseFacturationType.telephone, {'label': "Téléphone", 'attr': {'placeholder': "Votre numéro de téléphone"}}) }}
+        <button type="submit" class="btn btn-success">
+            {% if editMode %}
+            Enregistrer les modifications
+            {% else %}
+            Ajouter la nouvelle adresse
+            {% endif %}
+        </button>
+
+    {{ form_end(AdresseFacturationType) }}
+</div>
+
+
+{% endblock %}

@@ -12,27 +12,27 @@
 
     <h3 class="m-5 center">Mes adresses de livraisons</h3>
 
+    <div class="container-fluid row row-cols-4 justify-content-center">
 
-<div class="container-fluid row row-cols-4 justify-content-center">
+        {% for adresselivraison in AdresseLivraison %}
 
-    {% for adresselivraison in AdresseLivraison %}
-
-            <div class="card  m-4">
-                <div class="card-body">
-                    <h5 class="card-title">Adresse numéro: {{ adresselivraison.id }}</h5>
-                    <p class="card-text">Nom: {{ adresselivraison.nom }}</p>
-                    <p class="card-text">Prénom: {{ adresselivraison.prenom }}</p>
-                    <p class="card-text">Adresse: {{ adresselivraison.adresse }}</p>
-                    <p class="card-text">Code postal: {{ adresselivraison.cp }}</p>
-                    <p class="card-text">Ville: {{ adresselivraison.ville }}</p>
-                    <p class="card-text">Téléphone: {{ adresselivraison.telephone }}</p>
-                    <a href="{{ path('livraison_edit', {'id': adresselivraison.id}) }}" class="btn btn-success">Modifier</a>
+                <div class="card  m-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Adresse numéro: {{ adresselivraison.id }}</h5>
+                        <p class="card-text">Nom: {{ adresselivraison.nom }}</p>
+                        <p class="card-text">Prénom: {{ adresselivraison.prenom }}</p>
+                        <p class="card-text">Adresse: {{ adresselivraison.adresse }}</p>
+                        <p class="card-text">Code postal: {{ adresselivraison.cp }}</p>
+                        <p class="card-text">Ville: {{ adresselivraison.ville }}</p>
+                        <p class="card-text">Téléphone: {{ adresselivraison.telephone }}</p>
+                        <a href="{{ path('livraison_edit', {'id': adresselivraison.id}) }}" class="btn btn-success m-1">Modifier</a>
+                        <a href="#" class="btn btn-danger m-1">Suprimer</a>
+                    </div>
                 </div>
-            </div>
 
-    {% endfor %}
+        {% endfor %}
 
-</div>
+    </div>
 
 
 {% endblock %}

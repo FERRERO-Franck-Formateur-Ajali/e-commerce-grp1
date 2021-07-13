@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\AdresseLivraison;
+use App\Entity\AdresseFacturation;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AdresseLivraisonRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AdresseFacturationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -24,10 +27,13 @@ class ProfilController extends AbstractController
     }
     
     /**
-     * @Route("/profil/info", name="info")
+     * @Route("/info", name="info")
      */
-    public function info() {
-        return $this->render('profil/info.html.twig');
+    public function linfo(UserRepository $userRepository): Response{
+        return $this->render('profil/info.html.twig', [
+            'controller_name' => 'ProfilController',
+            'User' => $userRepository->findAll(),
+        ]);
     }
 
     /**
@@ -41,11 +47,11 @@ class ProfilController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/livraison/new", name="livraison_create")
      * @Route("/livraison/{id}/edit", name="livraison_edit")
      */
-    public function form(AdresseLivraison $adresselivraison = null, Request $request, EntityManagerInterface $manager){
+    public function formLivraison(AdresseLivraison $adresselivraison = null, Request $request, EntityManagerInterface $manager){
 
         if(!$adresselivraison){
             $adresselivraison = new AdresseLivraison();
@@ -79,10 +85,50 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/facturation", name="facturation")
+     * @Route("/facturation", name="facturation")
      */
-    public function facturation() {
-        return $this->render('profil/facturation.html.twig');
+    public function facturation(AdresseFacturationRepository $adresseFacturationRepository): Response{
+        return $this->render('profil/facturation.html.twig', [
+            'controller_name' => 'ProfilController',
+            'AdresseFacturation' => $adresseFacturationRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/facturation/new", name="facturation_create")
+     * @Route("/facturation/{id}/edit", name="facturation_edit")
+     */
+    public function formFacturation(AdresseFacturation $adressefacturation = null, Request $request, EntityManagerInterface $manager){
+
+        if(!$adressefacturation){
+            $adressefacturation= new AdresseFacturation();
+        }
+        //$adressefacturation = new AdresseFacturation();
+
+        $form = $this->createFormBuilder($adressefacturation)
+                     ->add('nom')
+                     ->add('prenom')
+                     ->add('adresse')
+                     ->add('cp')
+                     ->add('ville')
+                     ->add('telephone')
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() AND $form->isValid()){
+            
+            $manager->persist($adressefacturation);
+            $manager->flush();
+
+            return $this->redirectToRoute('facturation', ['id' => $adressefacturation->getId()]);
+            
+        }
+
+        return $this->render('profil/facturationcreate.html.twig', [
+            'AdresseFacturationType' => $form->createView(),
+            'editMode' => $adressefacturation->getId() !== null
+        ]);
     }
 
     /**
