@@ -6,12 +6,13 @@ use Faker\Factory;
 use App\Entity\Produit;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Comment;
 
 class ProduitFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create();
+        $faker = Factory::create("fr_FR");
 
         for($i = 1; $i <= 50; $i++){
             $randomprice = random_int(1, 30);
@@ -30,6 +31,20 @@ class ProduitFixtures extends Fixture
                     ->setPromo($promo);
 
             $manager->persist($produit);
+
+            for ($k = 1; $k <= mt_rand(0, 5); $k++){
+                $comment = new Comment();
+
+                $content = '<p>' . join($faker->paragraphs(2), '</p><p>') . '</p>';
+
+                $comment->setAuthor($faker->name)
+                        ->setContent($content)
+                        ->setCreatedAt($faker->dateTime())
+                        ->setProduit($produit);
+                
+                $manager->persist($comment);
+                        
+            }
         }
 
         $manager->flush();

@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+date_default_timezone_set('Europe/Paris');
+
+use App\Entity\Comment;
 use App\Entity\Produit;
+use App\Form\CommentType;
 use App\Repository\ProduitRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProduitsController extends AbstractController
@@ -39,12 +41,28 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/produits/{id}", name="produits_show")
      */
-    public function show(ProduitRepository $repo, $id){
+    public function show(ProduitRepository $repo, $id,Produit $produit, Request $request, EntityManagerInterface $manager){
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid()){ 
+            $comment->setCreatedAt(new \DateTime())
+                    ->setProduit($produit);
+
+            $manager->persist($comment);
+            $manager->flush(); 
+
+            return $this->redirectToRoute('produits_show',['id' => $produit->getId()]);
+        }
 
         $produit = $repo->find($id);
 
         return $this->render('produits/show.html.twig', [
-            'produit' => $produit
+            'produit' => $produit,
+            'CommentForm' => $form->createView()
         ]);
     }
 
