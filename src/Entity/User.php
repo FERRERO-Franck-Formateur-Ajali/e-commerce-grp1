@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -40,6 +42,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $Nom;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $Prenom;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $Birthday;
+
+    /**
+     * @ORM\Column(type="string", length=14)
+     */
+    private $phone;
+
+    private $newemail;
+    private $newpassword;
+
+    public function __construct()
+    {
+        $this->roles=['ROLES_USER'];
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +166,94 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->Nom;
+    }
+
+    public function setNom(string $Nom): self
+    {
+        $this->Nom = $Nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->Prenom;
+    }
+
+    public function setPrenom(string $Prenom): self
+    {
+        $this->Prenom = $Prenom;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->Birthday;
+    }
+
+    public function setBirthday(\DateTimeInterface $Birthday): self
+    {
+        $this->Birthday = $Birthday;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newpassword
+     */ 
+    public function getNewpassword()
+    {
+        return $this->newpassword;
+    }
+
+    /**
+     * Set the value of newpassword
+     *
+     * @return  self
+     */ 
+    public function setNewpassword($newpassword)
+    {
+        $this->newpassword = $newpassword;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newemail
+     */ 
+    public function getNewemail()
+    {
+        return $this->newemail;
+    }
+
+    /**
+     * Set the value of newemail
+     *
+     * @return  self
+     */ 
+    public function setNewemail($newemail)
+    {
+        $this->newemail = $newemail;
 
         return $this;
     }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!{% endblock %}
+
+{% block body %}
+
+    <h1 class="center m-5"> Adresse de livraisons
+        <br/><a href="{{ path('livraison_create')}}" class="btn btn-success m-5 p-3">Créer une nouvelle adresse</a>
+    </h1>
+
+    <hr>
+
+    <h3 class="m-5 center">Mes adresses de livraisons</h3>
+
+
+<div class="container-fluid row row-cols-4 justify-content-center">
+
+    {% for adresselivraison in AdresseLivraison %}
+
+            <div class="card  m-4">
+                <div class="card-body">
+                    <h5 class="card-title">Adresse numéro: {{ adresselivraison.id }}</h5>
+                    <p class="card-text">Nom: {{ adresselivraison.nom }}</p>
+                    <p class="card-text">Prénom: {{ adresselivraison.prenom }}</p>
+                    <p class="card-text">Adresse: {{ adresselivraison.adresse }}</p>
+                    <p class="card-text">Code postal: {{ adresselivraison.cp }}</p>
+                    <p class="card-text">Ville: {{ adresselivraison.ville }}</p>
+                    <p class="card-text">Téléphone: {{ adresselivraison.telephone }}</p>
+                    <a href="{{ path('livraison_edit', {'id': adresselivraison.id}) }}" class="btn btn-success">Modifier</a>
+                </div>
+            </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
