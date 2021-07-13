@@ -8,25 +8,28 @@
 <div class="m-5">
     <h1 class="center m-5"> Adresse de livraisons </h1>
 
-    <h3 class="mt-5 mb-5">Ajouter une nouvelle adresse de livraison</h3>
+    <div class="container">
 
-    {{ form_start(AdresseLivraisonType) }}
+        <h3 class="mt-5 mb-4">Ajouter une nouvelle adresse de livraison</h3>
 
-        {{ form_row(AdresseLivraisonType.nom, {'label': "Nom", 'attr': {'placeholder': "Votre nom"}}) }}
-        {{ form_row(AdresseLivraisonType.prenom, {'label': "Prénom", 'attr': {'placeholder': "Votre prénom"}}) }}
-        {{ form_row(AdresseLivraisonType.adresse, {'label': "Adresse", 'attr': {'placeholder': "Votre adresse"}}) }}
-        {{ form_row(AdresseLivraisonType.cp, {'label': "Code postal", 'attr': {'placeholder': "Votre code postal"}}) }}
-        {{ form_row(AdresseLivraisonType.ville, {'label': "Ville", 'attr': {'placeholder': "Votre ville de résidence"}}) }}
-        {{ form_row(AdresseLivraisonType.telephone, {'label': "Téléphone", 'attr': {'placeholder': "Votre numéro de téléphone"}}) }}
-        <button type="submit" class="btn btn-success">
-            {% if editMode %}
-            Enregistrer les modifications
-            {% else %}
-            Ajouter la nouvelle adresse
-            {% endif %}
-        </button>
+        {{ form_start(AdresseLivraisonType) }}
 
-    {{ form_end(AdresseLivraisonType) }}
+            {{ form_row(AdresseLivraisonType.nom, {'label': "Nom", 'attr': {'placeholder': "Votre nom"}}) }}
+            {{ form_row(AdresseLivraisonType.prenom, {'label': "Prénom", 'attr': {'placeholder': "Votre prénom"}}) }}
+            {{ form_row(AdresseLivraisonType.adresse, {'label': "Adresse", 'attr': {'placeholder': "Votre adresse"}}) }}
+            {{ form_row(AdresseLivraisonType.cp, {'label': "Code postal", 'attr': {'placeholder': "Votre code postal"}}) }}
+            {{ form_row(AdresseLivraisonType.ville, {'label': "Ville", 'attr': {'placeholder': "Votre ville de résidence"}}) }}
+            {{ form_row(AdresseLivraisonType.telephone, {'label': "Téléphone", 'attr': {'placeholder': "Votre numéro de téléphone"}}) }}
+            <button type="submit" class="btn btn-success">
+                {% if editMode %}
+                Enregistrer les modifications
+                {% else %}
+                Ajouter la nouvelle adresse
+                {% endif %}
+            </button>
+
+        {{ form_end(AdresseLivraisonType) }}
+    </div>
 </div>
 
 

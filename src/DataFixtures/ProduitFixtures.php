@@ -23,9 +23,9 @@ class ProduitFixtures extends Fixture
 
             $produit = new Produit();
             $produit->setName($faker->sentence(rand(3, 10), true))
-                    ->setContent($faker->text(rand(200, 300)))
+                    ->setContent($faker->text(rand(100, 150)))
                     ->setDetails($faker->text(rand(100, 2000)))
-                    ->setImage($faker->imageUrl(800, 600, 'animals'))
+                    ->setImage($faker->imageUrl(800, 600, 'food'))
                     ->setPrice("$randomprice")
                     ->setStock("$randomstock")
                     ->setPromo($promo);

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\AdresseLivraison;
 use App\Entity\AdresseFacturation;
 use App\Repository\UserRepository;
@@ -33,6 +34,41 @@ class ProfilController extends AbstractController
         return $this->render('profil/info.html.twig', [
             'controller_name' => 'ProfilController',
             'User' => $userRepository->findAll(),
+        ]);
+    }
+
+    /**
+     *  @Route("/info/new", name="info_create")
+     * @Route("/info/{id}/edit", name="info_edit")
+     */
+    public function infoedit(User $user = null, Request $request, EntityManagerInterface $manager){
+
+        if(!$user){
+            $user = new User();
+        }
+
+        $form = $this->createFormBuilder($user)
+                     ->add('nom')
+                     ->add('prenom')
+                     ->add('email')
+                     ->add('password')
+                     ->add('phone')
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() AND $form->isValid()){
+            
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('info', ['id' => $user->getId()]);
+            
+        }
+
+        return $this->render('profil/infoedit.html.twig', [
+            'RegistrationFormType' => $form->createView(),
+            'editMode' => $user->getId() !== null
         ]);
     }
 

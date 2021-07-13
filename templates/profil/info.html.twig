@@ -8,19 +8,26 @@
 
     {% for user in User %}
 
-        <div class="card  m-4">
-            <div class="card-body">
-                <h5 class="card-title center">Mes info perso</h5>
-                <p class="card-text">Nom: {{ user.nom }}</p>
-                <p class="card-text">Prénom: {{ user.prenom }}</p>
-                <p class="card-text">Email: {{ user.email }}</p>
-                <p class="card-text">Mot de passe: {{ user.plainPassword }}</p>
-                <p class="card-text">Date de naissance: {{ user.birthday }}</p>
-                <p class="card-text">Téléphone: {{ user.phone }}</p>
-                <a href="{{ path('info_edit', {'id': user.id}) }}" class="btn btn-success m-1">Modifier</a>
-            </div>
-        </div>
+        <div class="container-fluid row row-cols-3 justify-content-center">
 
+
+            <div class="card p-3 m-5 container-fluid justify-content-center" style="max-width : 50%">
+                <div class="card-header center">Mes infos</div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p class="card-text">Nom: {{ user.nom }}</p>
+                        <p class="card-text">Prénom: {{ user.prenom }}</p>
+                        <p class="card-text">Email: {{ user.email }}</p>
+                        <p class="card-text">Mot de passe: {{ user.password }}</p>
+                        <p class="card-text">Téléphone: {{ user.phone }}</p>
+                    </blockquote>
+
+                        <a href="{{ path('info_edit', {'id': user.id}) }}" class="btn btn-success m-3" style="max-width : auto">Modifier</a>
+                    
+                </div>
+            </div>
+
+        </div>
     {% endfor %}
 
 {% endblock %}
