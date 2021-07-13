@@ -28,7 +28,7 @@
                 <td>{{ user.password }}</td>
                 <td>{{ user.Nom }}</td>
                 <td>{{ user.Prenom }}</td>
-                <td>{{ user.Birthday ? user.Birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ user.Birthday ? user.Birthday|date('Y-m-d') }}</td>
                 <td>{{ user.phone }}</td>
                 <td>
                     <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
