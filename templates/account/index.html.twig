@@ -11,10 +11,13 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
+    This friendly message is coming from: 
     <ul>
-        <li>Your controller at <code><a href="{{ 'E:/ALAJI/e-commerce/src/Controller/AccountController.php'|file_link(0) }}">src/Controller/AccountController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/ALAJI/e-commerce/templates/account/index.html.twig'|file_link(0) }}">templates/account/index.html.twig</a></code></li>
+        <li>mail : {{ app.user.email }}</li>
+        <li>nom : {{ app.user.nom }}</li>
+        <li>prenom : {{ app.user.prenom }}</li>
+        <li>date de naissance : {{ app.user.birthday|date("d/m/Y") }}</li>
+        <li>tel : {{ app.user.phone }}</li>
     </ul>
 </div>
 {% endblock %}
