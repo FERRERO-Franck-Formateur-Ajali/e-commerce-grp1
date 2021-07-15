@@ -11,6 +11,7 @@
         <div class="mt-4 mb-4">
             <h1 class="mb-4">Créer un nouveau compte:</h1>
             {{ form_start(registrationForm) }}
+                {#}
                 {{ form_row(registrationForm.prenom, {'attr': {'placeholder': "Prenom"}}) }}
                 {{ form_row(registrationForm.nom, {'attr': {'placeholder': "Nom"}}) }}
                 {{ form_row(registrationForm.email, {'label':"Adresse Mail", 'attr': {'placeholder': "Adresse mail"}}) }}
@@ -19,7 +20,8 @@
                 {{ form_row(registrationForm.phone, {'label':"Téléphone"}) }}
                 {{ form_row(registrationForm.newsletter, {'label':"Inscription à la Newsletter"}) }}
                 {{ form_row(registrationForm.cgv, {'label':"Accepter les termes des C.G.V"}) }}
-                
+                {#}
+                {{ form_widget(registrationForm) }}
 
                 <button rtype="submit" class="btn btn-success">Enregistrer</button>
             {{ form_end(registrationForm) }}

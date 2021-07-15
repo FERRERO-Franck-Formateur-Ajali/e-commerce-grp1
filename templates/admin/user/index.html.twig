@@ -3,6 +3,7 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+<div class="m-5">
     <h1>Liste des utilisateurs</h1>
 
     <table class="table">
@@ -13,10 +14,10 @@
                 <th>Roles</th>
                 <th>Mot de passe</th>
                 <th>Nom</th>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <th>Date de naissance</th>
                 <th>Téléphone</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +29,7 @@
                 <td>{{ user.password }}</td>
                 <td>{{ user.Nom }}</td>
                 <td>{{ user.Prenom }}</td>
-                <td>{{ user.Birthday ? user.Birthday|date('Y-m-d') }}</td>
+                <td>{{ user.Birthday ? user.Birthday|date('d-m-Y') }}</td>
                 <td>{{ user.phone }}</td>
                 <td>
                     <a href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
@@ -44,4 +45,5 @@
     </table>
 
     <a class="btn btn-success" href="{{ path('admin_user_new') }}">Ajouter un nouveau client</a>
+</div>
 {% endblock %}

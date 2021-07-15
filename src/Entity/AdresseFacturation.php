@@ -47,6 +47,12 @@ class AdresseFacturation
      */
     private $telephone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="adresseFacturations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +126,18 @@ class AdresseFacturation
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

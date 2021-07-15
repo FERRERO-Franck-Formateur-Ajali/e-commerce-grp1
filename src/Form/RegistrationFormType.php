@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegistrationFormType extends AbstractType
@@ -18,33 +19,9 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('email')
-            ->add('birthday', DateType::class, array(
-                'required' => false,
-                'empty_data' => null,
-                'attr' => array(
-                    'placeholder' => 'mm/dd/yyyy'
-                )))
-            ->add('phone')
-            ->add('cgv', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Veuillez accepter les cgv',
-                    ]),
-                ],
-            ])
-            ->add('newsletter', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Veuillez accepter l\'\inscription à la Newsletter',
-                    ]),
-                ],
-            ])
+            ->add('email', EmailType::class)
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'Votre mot de passe',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -58,6 +35,30 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('client', ClientType::class, [
+                'label' => 'Client',
+                'label_attr' => [
+                    'style' => 'display:none',
+                ]
+            ])
+            ->add('cgv', CheckboxType::class, [
+                'label' => 'Accepter les termes des C.G.V',
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Veuillez accepter les cgv',
+                    ]),
+                ],
+            ])
+            ->add('newsletter', CheckboxType::class, [
+                'label' => 'Inscription à la Newsletter',
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Veuillez accepter l\'\inscription à la Newsletter',
                     ]),
                 ],
             ])

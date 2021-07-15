@@ -6,8 +6,6 @@
 
     <h1 class="center m-5">Mes informations personnelles</h1>
 
-    {% for user in User %}
-
         <div class="container-fluid row row-cols-3 justify-content-center">
 
 
@@ -15,19 +13,18 @@
                 <div class="card-header center">Mes infos</div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p class="card-text">Nom: {{ user.nom }}</p>
-                        <p class="card-text">Prénom: {{ user.prenom }}</p>
-                        <p class="card-text">Email: {{ user.email }}</p>
-                        <p class="card-text">Mot de passe: {{ user.password }}</p>
-                        <p class="card-text">Téléphone: {{ user.phone }}</p>
+                        <p class="card-text">Nom: {{ app.user.client.nom }}</p>
+                        <p class="card-text">Prénom: {{ app.user.client.prenom }}</p>
+                        <p class="card-text">Email: {{ app.user.email }}</p>
+                        <p class="card-text">Mot de passe: {{ app.user.password }}</p>
+                        <p class="card-text">Téléphone: {{ app.user.client.phone }}</p>
                     </blockquote>
 
-                        <a href="{{ path('info_edit', {'id': user.id}) }}" class="btn btn-success m-3" style="max-width : auto">Modifier</a>
+                        <a href="{{ path('info_edit', {'id': app.user.id}) }}" class="btn btn-success m-3" style="max-width : auto">Modifier</a>
                     
                 </div>
             </div>
 
         </div>
-    {% endfor %}
 
 {% endblock %}

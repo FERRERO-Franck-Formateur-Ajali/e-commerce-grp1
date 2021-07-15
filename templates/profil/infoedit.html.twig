@@ -10,11 +10,13 @@
 
     {{ form_start(RegistrationFormType) }}
 
-        {{ form_row(RegistrationFormType.nom, {'label': "Nom", 'attr': {'placeholder': "Votre nom"}}) }}
+       {#} {{ form_row(RegistrationFormType.nom, {'label': "Nom", 'attr': {'placeholder': "Votre nom"}}) }}
         {{ form_row(RegistrationFormType.prenom, {'label': "Prénom", 'attr': {'placeholder': "Votre prénom"}}) }}
         {{ form_row(RegistrationFormType.email, {'label': "email", 'attr': {'placeholder': "Votre email"}}) }}
         {{ form_row(RegistrationFormType.password, {'label': "Password", 'attr': {'placeholder': "Votre nouveau mot de passe"}}) }}
         {{ form_row(RegistrationFormType.phone, {'label': "Téléphone", 'attr': {'placeholder': "Votre numéro de téléphone"}}) }}
+        {#}
+        {{ form_widget(RegistrationFormType) }}
         <button type="submit" class="btn btn-success">
             Enregistrer les modifications
         </button>

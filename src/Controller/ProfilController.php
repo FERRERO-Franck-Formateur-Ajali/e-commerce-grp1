@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ClientType;
 use App\Entity\AdresseLivraison;
 use App\Entity\AdresseFacturation;
 use App\Repository\UserRepository;
@@ -12,8 +13,9 @@ use App\Repository\AdresseLivraisonRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AdresseFacturationRepository;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
@@ -41,24 +43,34 @@ class ProfilController extends AbstractController
      *  @Route("/info/new", name="info_create")
      * @Route("/info/{id}/edit", name="info_edit")
      */
-    public function infoedit(User $user = null, Request $request, EntityManagerInterface $manager){
+    public function infoedit(User $user = null, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder){
 
         if(!$user){
             $user = new User();
         }
 
         $form = $this->createFormBuilder($user)
-                     ->add('nom')
-                     ->add('prenom')
                      ->add('email')
-                     ->add('password')
-                     ->add('phone')
+                     ->add('newpassword', PasswordType::class, [
+                         'label' => 'Nouveau mot de passe', 
+                         'attr' => [
+                            'placeholder' => 'Laisse vide poour pas modifier',
+                        ]                   
+                      ])
+                     ->add('client',ClientType::class)
                      ->getForm();
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() AND $form->isValid()){
-            
+            if ($user->getNewPassword() !== null) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $user->getNewPassword()
+                    )
+                );
+            }
             $manager->persist($user);
             $manager->flush();
 
@@ -154,6 +166,7 @@ class ProfilController extends AbstractController
 
         if($form->isSubmitted() AND $form->isValid()){
             
+            $adressefacturation->setClient($this->getUser()->getClient());
             $manager->persist($adressefacturation);
             $manager->flush();
 
@@ -186,6 +199,21 @@ class ProfilController extends AbstractController
      */
     public function newsletter() {
         return $this->render('profil/newsletter.html.twig');
+    }
+
+    
+    /**
+     * @Route("/profil/delete/adresse/facturation/{id}", name="adresse_facturation_delete", methods={"POST"})
+     */
+    public function delete(Request $request, AdresseFacturation $adressefacturation): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$adressefacturation->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($adressefacturation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('facturation');
     }
     
 }
