@@ -10,7 +10,11 @@
 
     <div class="container">
 
+        {% if editMode %}
+        <h3 class="mt-5 mb-4">Modifier mon adresse de livraison</h3>
+        {% else %}
         <h3 class="mt-5 mb-4">Ajouter une nouvelle adresse de livraison</h3>
+        {% endif %}
 
         {{ form_start(AdresseLivraisonType) }}
 

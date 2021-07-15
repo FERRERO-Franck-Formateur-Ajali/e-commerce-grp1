@@ -16,10 +16,6 @@
     flex-direction: column;
 } 
 
-button.btn { 
-    margin-top: auto; 
-}
-
 .btn-color:hover{
     color:rgb(255, 208, 0);
 }
@@ -38,6 +34,11 @@ button.btn {
     background-color: rgb(159, 201, 82) !important;
     color: white !important;
     font-weight: 700 !important;
+}
+
+.green-title{
+    color:green !important;
+    font-weight: 800 !important;
 }
     
 @media (min-width:34em) {
