@@ -118,7 +118,7 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() AND $form->isValid()){
-            
+            $adresselivraison->setClient($this->getUser()->getClient());
             $manager->persist($adresselivraison);
             $manager->flush();
 
