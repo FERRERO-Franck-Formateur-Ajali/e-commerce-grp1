@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +38,17 @@ class Comment
      */
     private $produit;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->statut = false;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,11 +78,6 @@ class Comment
         return $this;
     }
 
-    public function __construct()
-    {
-        $this->createdAt = new DateTime();
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -93,6 +98,18 @@ class Comment
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

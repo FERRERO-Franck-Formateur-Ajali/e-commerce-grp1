@@ -4,6 +4,27 @@
 
 {% block body %}
 
-<h1> Informations personnelles </h1>
+    <h1 class="center m-5">Mes informations personnelles</h1>
+
+        <div class="container-fluid row row-cols-3 justify-content-center">
+
+
+            <div class="card p-3 m-5 container-fluid justify-content-center" style="max-width : 50%">
+                <div class="card-header center">Mes infos</div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p class="card-text">Nom: {{ app.user.client.nom }}</p>
+                        <p class="card-text">Prénom: {{ app.user.client.prenom }}</p>
+                        <p class="card-text">Email: {{ app.user.email }}</p>
+                        <p class="card-text">Mot de passe: {{ app.user.password }}</p>
+                        <p class="card-text">Téléphone: {{ app.user.client.phone }}</p>
+                    </blockquote>
+
+                        <a href="{{ path('info_edit', {'id': app.user.id}) }}" class="btn btn-success m-3" style="max-width : auto">Modifier</a>
+                    
+                </div>
+            </div>
+
+        </div>
 
 {% endblock %}

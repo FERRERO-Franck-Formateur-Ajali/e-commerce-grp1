@@ -6,6 +6,7 @@ use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ClientType extends AbstractType
 {
@@ -15,6 +16,12 @@ class ClientType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('phone')
+            ->add('birthday', DateType::class, array(
+                'required' => false,
+                'empty_data' => null,
+                'attr' => array(
+                    'placeholder' => 'mm/dd/yyyy'
+                )))
         ;
     }
 

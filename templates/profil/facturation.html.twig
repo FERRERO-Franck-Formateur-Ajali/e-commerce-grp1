@@ -4,6 +4,36 @@
 
 {% block body %}
 
-<h1> Adresses de facturations </h1>
+
+    <h1 class="center m-5"> Adresse de facturations
+        <br/><a href="{{ path('facturation_create')}}" class="btn btn-success m-5 p-3">Créer une nouvelle adresse</a>
+    </h1>
+
+    <hr>
+
+    <h3 class="m-5 center">Mes adresses de facturation</h3>
+
+    <div class="container-fluid row row-cols-4 justify-content-center">
+
+        {% for adressefacturation in AdresseFacturation %}
+
+                <div class="card  m-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Adresse numéro: {{ adressefacturation.id }}</h5>
+                        <p class="card-text">Nom: {{ adressefacturation.nom }}</p>
+                        <p class="card-text">Prénom: {{ adressefacturation.prenom }}</p>
+                        <p class="card-text">Adresse: {{ adressefacturation.adresse }}</p>
+                        <p class="card-text">Code postal: {{ adressefacturation.cp }}</p>
+                        <p class="card-text">Ville: {{ adressefacturation.ville }}</p>
+                        <p class="card-text">Téléphone: {{ adressefacturation.telephone }}</p>
+                        <a href="{{ path('facturation_edit', {'id': adressefacturation.id}) }}" class="btn btn-success btn-block m-1">Modifier</a>
+                        {{ include('profil/_delete_form.html.twig') }}
+                    </div>
+                </div>
+
+        {% endfor %}
+
+    </div>
+
 
 {% endblock %}

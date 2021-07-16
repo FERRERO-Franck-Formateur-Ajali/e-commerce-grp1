@@ -1,0 +1,14 @@
+
+<div class="container">
+    {{ form_start(form) }}
+        {{ form_row(form.name, {'label':"Nom"}) }}
+        {{ form_row(form.content, {'label':"Contenu"}) }}
+        {{ form_row(form.image, {'label':"Image", 'attr': {'placeholder': "Veuillez renseigner l'url de l'image"}}) }}
+        {{ form_row(form.price, {'label':"Prix"}) }}
+        {{ form_row(form.stock) }}
+        {{ form_row(form.promo, {'label':"Promo"}) }}
+        {{ form_row(form.details, {'label':"Détails"}) }}
+
+        <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>
