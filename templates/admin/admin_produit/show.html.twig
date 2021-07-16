@@ -42,6 +42,25 @@
         </tbody>
     </table>
 
+
+        <h2 class="center mb-5">{{ comments|length }} avis sur le produit:</h2>
+
+        {% for comment in comments %}
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4>{{ comment.author }}</h4> <button type="button" class="btn btn-primary desactived" data-statut="{{ comment.statut }}" data-url="{{ path('admin_produit_desactived') }}" id="comment-{{ loop.index }}" data-comment="{{ comment.id }}">Désactiver le commentaire</button>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>{{ comment.content | raw }}</p>
+                    <footer class="blockquote-footer">Le {{comment.createdAt | date ( 'd/m/Y à H:i' )}} </footer>
+                </blockquote>
+            </div>
+        </div>
+
+        {% endfor %}
+
     <a href="{{ path('admin_produit_index') }}">Retour à la liste</a>
 
     <br>
@@ -49,4 +68,34 @@
     <a href="{{ path('admin_produit_edit', {'id': produit.id}) }}">Modifier</a>
 
     {{ include('admin/admin_produit/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.desactived', function() {
+            let id_button = $(this).attr('id');
+            let id_comment = $(this).data('comment');
+            $.ajax({
+                type: 'POST',
+                url: $(this).data('url'),
+                data: {
+                    'id': id_comment,
+                    'statut': $(this).data('statut')
+                }, 
+                success: function(data) {
+                    if(data == 'true') {
+                        $('#'+id_button).data('statut', 'true');
+                        $('#'+id_button).text('Activer le commentaire');
+                    } 
+                    if(data == 'false') {
+                        $('#'+id_button).data('statut', 'false');
+                        $('#'+id_button).text('Désactiver le commentaire');
+                    }
+                }
+            });
+      
+    });
+});
+</script>
 {% endblock %}

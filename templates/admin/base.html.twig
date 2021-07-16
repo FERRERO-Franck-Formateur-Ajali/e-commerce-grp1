@@ -6,18 +6,16 @@
         
          <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/elegant-icons.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/nice-select.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/slicknav.min.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/custom.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('/css/style.css') }}" type="text/css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        {% endblock %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/elegant-icons.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
      <!-- Humberger Begin thème responsive pour mobile -->
@@ -28,10 +26,10 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price"></span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -95,7 +93,6 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li>Livraison offerte pour toutes les commandes au dela de 100€</li>
                                 {% if app.user %}
                                 <li><i class="fa fa-envelope"></i>{{ app.user.email }} </li>
                                 {% endif %}
@@ -107,14 +104,14 @@
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin_user_index') }}">Admin</a>
+                                {% endif %}
                                 {% if not app.user %}
                                 <a href="{{ path('app_login') }}"><i class="fa fa-user"></i> Login</a>
                                 <a href="{{ path('app_register') }}"><i class="fa fa-user"></i> Register</a>
                                 {% else %}
                                 <a href="{{ path('app_logout') }}">Déconnexion</a>
-                                {% endif %}
-                                {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('admin_user_index') }}">Admin</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -130,21 +127,21 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <nav class="header__menu">
+                    <nav class="header__menu center">
                         <ul>
                             <li><a href="{{ path('admin_user_index') }}">Client</a></li>
                             <li><a href="{{ path('admin_produit_index') }}">Produits</a></li>
-                            <li><a href="{{ path('comment_index') }}">Commentaires</a></li>
+                            <li><a href="{{ path('home') }}">Retour au site</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{{ path('cart_index') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="{{ path('cart_index') }}"><i class="fa fa-shopping-bag"></i></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price"></div>
                     </div>
                 </div>
             </div>
@@ -222,18 +219,16 @@
     </footer>
     <!-- Footer Section End -->
         
-        {% block javascripts %}
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="{{ asset('/js/main.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        {% endblock %}
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
+        <script src="{{ asset('js/mixitup.min.js') }}"></script>
+        <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

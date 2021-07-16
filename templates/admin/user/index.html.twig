@@ -25,12 +25,12 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.roles ? user.roles[0] : '' }}</td>
                 <td>{{ user.password }}</td>
-                <td>{{ user.Nom }}</td>
-                <td>{{ user.Prenom }}</td>
-                <td>{{ user.Birthday ? user.Birthday|date('d-m-Y') }}</td>
-                <td>{{ user.phone }}</td>
+                <td>{{ user.client != null ? user.client.nom : null }}</td>
+                <td>{{ user.client != null ? user.client.prenom : null }}</td>
+                <td>{{ user.client != null ? user.client.birthday ? user.client.birthday|date('d-m-Y') : null }}</td>
+                <td>{{ user.client != null ? user.client.phone : null }}</td>
                 <td>
                     <a href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
                     <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>

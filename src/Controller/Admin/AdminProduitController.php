@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -57,6 +58,7 @@ class AdminProduitController extends AbstractController
     {
         return $this->render('admin/admin_produit/show.html.twig', [
             'produit' => $produit,
+            'comments' => $produit->getComments()->toArray(),
         ]);
     }
 
@@ -92,5 +94,26 @@ class AdminProduitController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_produit_index');
+    }
+
+    /**
+     * @Route("/desactived/commentaire/client", name="admin_produit_desactived", methods={"POST"})
+     */
+    public function desactived(Request $request): JsonResponse
+    {
+        $return = null;
+        $manager =$this->getDoctrine()->getManager();
+
+
+        $id = $request->request->get('id');
+        $statut = $request->request->get('statut');
+
+        if ($statut === 'true') {
+            $return = 'false';
+        }
+
+        
+
+        return new JsonResponse($return);
     }
 }

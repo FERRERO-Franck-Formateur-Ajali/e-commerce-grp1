@@ -34,7 +34,11 @@ class AdminUserController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'label_email' => 'Email',
+            'label_password' => 'Mot de passe',
+            'required' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +77,12 @@ class AdminUserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'label_email' => 'Nouveau email',
+            'label_password' => 'Nouveau mot de passe',
+            'required' => false,
+            'placeholder' => 'Laissez le champ vide pour pas le modifier'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
