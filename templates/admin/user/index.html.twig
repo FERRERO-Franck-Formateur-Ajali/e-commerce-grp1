@@ -32,7 +32,6 @@
                 <td>{{ user.client != null ? user.client.birthday ? user.client.birthday|date('d-m-Y') : null }}</td>
                 <td>{{ user.client != null ? user.client.phone : null }}</td>
                 <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
                     <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
                 </td>
             </tr>

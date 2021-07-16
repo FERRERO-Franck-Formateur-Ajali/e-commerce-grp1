@@ -32,7 +32,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/info", name="info")
      */
-    public function linfo(UserRepository $userRepository): Response{
+    public function info(UserRepository $userRepository): Response{
         return $this->render('profil/info.html.twig', [
             'controller_name' => 'ProfilController',
             'User' => $userRepository->findAll(),
